@@ -2,7 +2,7 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 18:28:13
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-18 20:08:22
+ * @LastEditTime: 2023-05-18 20:18:23
  * @FilePath: /xddcore/OpenOS/src/arm64/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
@@ -26,3 +26,4 @@
 1. Lab_3_1：熟悉MOV和LDR指令
 2. Lab_3_2: 前变基与后变基寻址模式-1
 3. Lab_3_3: 前变基与后变基寻址模式-2
+4. Lab_3_4: PC相对地址寻址
