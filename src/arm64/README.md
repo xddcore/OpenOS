@@ -2,7 +2,7 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 18:28:13
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-18 21:17:11
+ * @LastEditTime: 2023-05-18 21:19:35
  * @FilePath: /xddcore/OpenOS/src/arm64/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
@@ -18,7 +18,7 @@
 
 ## 如何开始？
 
-请参考SleepPanda开源项目(https://github.com/xddcore/SleepPanda)中的Raspberry Pi OS安装配置部分内容，以完成对树莓派4b的开发环境准备工作。
+请参考SleepPanda开源项目 (https://github.com/xddcore/SleepPanda) 中的Raspberry Pi OS安装配置部分内容，以完成对树莓派4b的开发环境准备工作。
 
 
 ## 目录结构
