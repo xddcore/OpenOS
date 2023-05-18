@@ -2,7 +2,7 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 18:28:13
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-18 20:18:23
+ * @LastEditTime: 2023-05-18 20:21:11
  * @FilePath: /xddcore/OpenOS/src/arm64/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
@@ -27,3 +27,5 @@
 2. Lab_3_2: 前变基与后变基寻址模式-1
 3. Lab_3_3: 前变基与后变基寻址模式-2
 4. Lab_3_4: PC相对地址寻址
+5. Lab_3_5: memcpy()函数的实现
+6. Lab_3_6: LDP和STP指令的使用
