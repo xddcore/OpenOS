@@ -2,7 +2,7 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 12:23:07
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-18 21:18:25
+ * @LastEditTime: 2023-05-19 21:09:47
  * @FilePath: /xddcore/OpenOS/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
@@ -22,7 +22,6 @@ BenOS: https://github.com/runninglinuxkernel/BenOS
 1. 从0到1，一步步实现一个操作系统。
 2. 功能模块经过Unit Test验证。
 3. 代码通过Linux CheckPatch.pl脚本检查。
-4. 提供很多个小实验，一步步上手(详见src/arm64)。
 
 ## 平台支持
 |  平台   | 支持情况  |

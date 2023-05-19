@@ -2,7 +2,7 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 18:28:13
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-19 21:03:04
+ * @LastEditTime: 2023-05-19 21:09:25
  * @FilePath: /xddcore/OpenOS/src/arm64/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
@@ -11,7 +11,7 @@
 
 本目录为Lab目录，装载有关A64指令集，GNU编译器，操作系统等的小实验。
 
->**本目录下所有小实验来源于《ARM64体系结构与编程实践》一书，感谢奔跑吧Linux社区的大牛们！**
+>**本目录下所有小实验来源于《ARM64体系结构与编程实践》一书，感谢奔跑吧Linux社区的大牛们！(官方仓库地址:https://github.com/runninglinuxkernel/arm64_programming_practice)**
 
 ## 需要的设备(二选一)
 
