@@ -2,8 +2,8 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 18:28:13
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-19 21:09:25
- * @FilePath: /xddcore/OpenOS/src/arm64/README.md
+ * @LastEditTime: 2023-05-20 17:49:37
+ * @FilePath: /OpenOS/src/arm64/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
 -->
@@ -38,11 +38,11 @@
 
 **算术与移位指令**
 
-- [ ] 1. Lab_4_1：测试ADDS和CMP指令的C标志位
-- [ ] 2. Lab_4_2: 条件标识位的使用
-- [ ] 3. Lab_4_3: 测试ANDS指令以及Z标志位
-- [ ] 4. Lab_4_4: 测试位段操作指令
-- [ ] 5. Lab_4_5: 使用位段指令来读取寄存器
+- [x] 1. Lab_4_1：测试ADDS和CMP指令的C标志位
+- [x] 2. Lab_4_2: 条件标识位的使用
+- [x] 3. Lab_4_3: 测试ANDS指令以及Z标志位
+- [x] 4. Lab_4_4: 测试位段操作指令
+- [x] 5. Lab_4_5: 使用位段指令来读取寄存器
 
 **比较指令与跳转指令**
 
