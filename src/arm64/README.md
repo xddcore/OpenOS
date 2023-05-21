@@ -2,8 +2,8 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 18:28:13
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-20 17:49:37
- * @FilePath: /OpenOS/src/arm64/README.md
+ * @LastEditTime: 2023-05-21 17:59:00
+ * @FilePath: /xddcore/OpenOS/src/arm64/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
 -->
@@ -46,9 +46,9 @@
 
 **比较指令与跳转指令**
 
-- [ ] 1. Lab_5_1：CMP和CMN指令
-- [ ] 2. Lab_5_2: 条件选择指令
-- [ ] 3. Lab_5_3: 子函数跳转
+- [x] 1. Lab_5_1：CMP和CMN指令
+- [x] 2. Lab_5_2: 条件选择指令
+- [x] 3. Lab_5_3: 子函数跳转
 
 **其他重要指令**
 
