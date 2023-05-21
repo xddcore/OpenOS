@@ -15,11 +15,14 @@ main:
     //所以C标志位为1
     
     //使用adc指令进行测试
-    adc x6, #0xfffffffffffffffd, #1 //x6 = NOT(x5)+1
+    mov x9, #0xfffffffffffffffd
+    mov x10, #1
+    adc x6, x9, x10 //x6 = NOT(x5)+1
     adc x7, x4, x6 //x7 = x4+x6 = x4 + NOT(x5) + 1
-    mrs x8, nzcv
+    mrs x8, NZCV
     //使用gdb检查x7的值，若x7的值等于1，且nzcv中出现无符号溢出且出现进位，
     //则测试通过 
+    ret
 
 
 

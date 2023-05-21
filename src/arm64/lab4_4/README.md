@@ -2,8 +2,8 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-19 20:52:31
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-20 17:09:51
- * @FilePath: /OpenOS/src/arm64/lab4_4/README.md
+ * @LastEditTime: 2023-05-21 16:41:57
+ * @FilePath: /xddcore/OpenOS/src/arm64/lab4_4/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
 -->
@@ -26,5 +26,5 @@
 > ANS:    
 > //x3和x4寄存器的值分别是多少?    
   //0x5678abcd的4-11bit:1011 1100   
-  //x3:0000 0000 0000 0000 0000 1011 1100 0000     
-  //x4:1111 1111 1111 1111 1111 1011 1100 0000   
+  //x3:0000 0000 0000 0000 0000 0000 1011 1100(0xbc)    
+  //x4:1111 1111 1111 1111 1111 1111 1011 1100      (0xffffffffffffffbc)     

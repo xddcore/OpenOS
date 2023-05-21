@@ -2,8 +2,8 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-19 20:55:38
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-20 17:25:57
- * @FilePath: /OpenOS/src/arm64/lab4_5/README.md
+ * @LastEditTime: 2023-05-21 16:45:05
+ * @FilePath: /xddcore/OpenOS/src/arm64/lab4_5/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
 -->
@@ -16,6 +16,10 @@
 > Note: Atomic字段为:第20-23位     
 > ID_AA64ISAR0_EL1寄存器可以使用 mrs指令 读取
 
+>ANS:读取到的值都是0
+
 (2)读取(1)中寄存器的AES字段到X2寄存器中，用来判断该寄存器是否支持AES指令。
 
 > Note: AES字段为:第4-7位
+
+>ANS:读取到的值都是0
