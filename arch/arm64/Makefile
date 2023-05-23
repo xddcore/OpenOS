@@ -2,7 +2,7 @@
 # arch/arm64/Makefile
 #
 
-LDFLAGS_benos	:=-p --no-undefined -X
+LDFLAGS_openos	:=-p --no-undefined -X
 #CPPFLAGS_vmlinux.lds = -DTEXT_OFFSET=$(TEXT_OFFSET)
 OBJCOPYFLAGS	:=-O binary -R .note -R .note.gnu.build-id -R .comment -S
 GZFLAGS		:=-9
@@ -52,7 +52,7 @@ machdirs := $(patsubst %,arch/arm/mach-%/,$(machine-y))
 core-y  += $(MACHINE)
 
 # Default target when executing plain make
-KBUILD_IMAGE	:= benos.bin
+KBUILD_IMAGE	:= openos.bin
 
 all:	$(KBUILD_IMAGE)
 
@@ -62,7 +62,7 @@ include/mach:
 	@echo '  SYMLINK include/asm/mach -> arch/arm64/$(INCDIR)/mach'
 	@$(SYMLINK) $(TOPDIR)/arch/arm64/$(INCDIR)/mach $@
 
-benos.bin: benos
+openos.bin: openos
 	@$(MAKE) $(build)=$(boot) $(boot)/$@
 
 archprepare: maketools
@@ -70,7 +70,7 @@ archprepare: maketools
 PHONY += maketools
 maketools : include/mach
 
-CLEAN_FILES += arch/$(ARCH)/boot/benos.bin
+CLEAN_FILES += arch/$(ARCH)/boot/openos.bin
 CLEAN_FILES += include/mach
 
 # We use MRPROPER_FILES and CLEAN_FILES now
@@ -101,8 +101,8 @@ QEMU_FLAGS  += -nographic
 
 run:
 	qemu-system-aarch64 $(QEMU_FLAGS) \
-	-kernel arch/arm64/boot/benos.bin
+	-kernel arch/arm64/boot/openos.bin
 
 debug:
 	qemu-system-aarch64 $(QEMU_FLAGS) \
-	-kernel arch/arm64/boot/benos.bin -S -s
+	-kernel arch/arm64/boot/openos.bin -S -s

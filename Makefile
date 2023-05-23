@@ -279,8 +279,8 @@ endif # $(dot-config)
 # The all: target is the default when no target is given on the
 # command line.
 # This allow a user to issue only 'make' to build a kernel
-# Defaults benos but it is usually overridden in the arch makefile
-all: benos
+# Defaults openos but it is usually overridden in the arch makefile
+all: openos
 
 include $(srctree)/arch/$(ARCH)/Makefile
 ifdef CONFIG_CC_OPT_SIZE
@@ -304,10 +304,10 @@ NOSTDINC_FLAGS += -nostdinc -nostdlib
 
 CHECKFLAGS     += $(NOSTDINC_FLAGS)
 
-# Default benos image to build when no specific target is given.
+# Default openos image to build when no specific target is given.
 # KBUILD_IMAGE may be overruled on the command line or
 # set in the environment
-export KBUILD_IMAGE ?= benos
+export KBUILD_IMAGE ?= openos
 
 #
 # INSTALL_PATH specifies where to place the updated kernel and map
@@ -316,12 +316,12 @@ export	INSTALL_PATH ?= /boot
 
 core-y		+= # kernel/ mm/
 
-benos-dirs	:= $(patsubst %/,%,$(filter %/, $(init-y) $(init-m) \
+openos-dirs	:= $(patsubst %/,%,$(filter %/, $(init-y) $(init-m) \
 		     $(libs-y) $(libs-m) \
 		     $(core-y) $(core-m) \
 		     $(drivers-y) $(drivers-m)))
 
-benos-alldirs	:= $(sort $(benos-dirs) $(patsubst %/,%,$(filter %/, \
+openos-alldirs	:= $(sort $(openos-dirs) $(patsubst %/,%,$(filter %/, \
 		     $(lib-n) $(lib-) \
 		     $(init-n) $(init-) \
 		     $(core-n) $(core-) \
@@ -334,18 +334,18 @@ drivers-y	:= $(patsubst %/, %/built-in.lib, $(drivers-y))
 
 # Build kernel
 # ---------------------------------------------------------------------------
-# benos is built from the objects selected by $(benos-init) and
-# $(benos-main). Most are built-in.lib files from top-level directories
+# openos is built from the objects selected by $(openos-init) and
+# $(openos-main). Most are built-in.lib files from top-level directories
 # in the kernel tree, others are specified in arch/$(ARCH)/Makefile.
-# Ordering when linking is important, and $(benos-init) must be first.
+# Ordering when linking is important, and $(openos-init) must be first.
 #
-# benos
+# openos
 #   ^
 #   |
-#   +-< $(benos-init)
+#   +-< $(openos-init)
 #   |   +--< init/version.o + more
 #   |
-#   +--< $(benos-main)
+#   +--< $(openos-main)
 #        +--< driver/built-in.lib mm/built-in.lib + more
 #
 # kernel version (uname -v) cannot be updated during normal
@@ -355,16 +355,16 @@ drivers-y	:= $(patsubst %/, %/built-in.lib, $(drivers-y))
 #
 # System.map is generated to document addresses of all kernel symbols
 
-benos-init := $(head-y) $(init-y)
-benos-main := $(core-y) $(libs-y) $(drivers-y)
-benos-all  := $(benos-init) $(benos-main)
-benos-lds  := arch/$(ARCH)/kernel/benos.lds
-benos-map  := benos.map
-export KBUILD_VMLINUX_OBJS := $(benos-all)
+openos-init := $(head-y) $(init-y)
+openos-main := $(core-y) $(libs-y) $(drivers-y)
+openos-all  := $(openos-init) $(openos-main)
+openos-lds  := arch/$(ARCH)/kernel/openos.lds
+openos-map  := openos.map
+export KBUILD_VMLINUX_OBJS := $(openos-all)
 
 # Generate new kernel version
-quiet_cmd_benos_version = GEN     .version
-      cmd_benos_version = set -e;                        \
+quiet_cmd_openos_version = GEN     .version
+      cmd_openos_version = set -e;                        \
 	if [ ! -r .version ]; then			\
 	  rm -f .version;				\
 	  echo 1 >.version;				\
@@ -375,34 +375,34 @@ quiet_cmd_benos_version = GEN     .version
 	$(MAKE) $(build)=init
 
 # The finally linked kernel.
-quiet_cmd_benos = LD      $@
-      cmd_benos = $(LD) $(LDFLAGS) $(LDFLAGS_benos) -o $@ \
-	-T $(benos-lds) -Map $(benos-map) $(benos-init) \
-	--start-group $(benos-main) --end-group \
-	$(filter-out $(benos-lds) $(benos-init) $(benos-main) FORCE ,$^)
-define rule_benos
+quiet_cmd_openos = LD      $@
+      cmd_openos = $(LD) $(LDFLAGS) $(LDFLAGS_openos) -o $@ \
+	-T $(openos-lds) -Map $(openos-map) $(openos-init) \
+	--start-group $(openos-main) --end-group \
+	$(filter-out $(openos-lds) $(openos-init) $(openos-main) FORCE ,$^)
+define rule_openos
 	:
-	+$(call cmd,benos)
-	$(Q)echo 'cmd_$@ := $(cmd_benos)' > $(dot-target).cmd
+	+$(call cmd,openos)
+	$(Q)echo 'cmd_$@ := $(cmd_openos)' > $(dot-target).cmd
 endef
 
 # kernel image - including updated kernel symbols
-benos: $(benos-lds) $(benos-init) $(benos-main) FORCE
-	$(call if_changed_rule,benos)
+openos: $(openos-lds) $(openos-init) $(openos-main) FORCE
+	$(call if_changed_rule,openos)
 	$(Q)rm -f .old_version
 
 # The actual objects are generated when descending,
 # make sure no implicit rule kicks in
-$(sort $(benos-init) $(benos-main) $(benos-lds)): $(benos-dirs) ;
+$(sort $(openos-init) $(openos-main) $(openos-lds)): $(openos-dirs) ;
 
-# Handle descending into subdirectories listed in $(benos-dirs)
+# Handle descending into subdirectories listed in $(openos-dirs)
 # Preset locale variables to speed up the build process. Limit locale
 # tweaks to this spot to avoid wrong language settings when running
 # make menuconfig etc.
 # Error messages still appears in the original language
 
-PHONY += $(benos-dirs)
-$(benos-dirs): prepare scripts
+PHONY += $(openos-dirs)
+$(openos-dirs): prepare scripts
 	$(Q)$(MAKE) $(build)=$@
 
 # Build the kernel release string
@@ -467,10 +467,10 @@ prepare0: archprepare FORCE
 # All the preparing..
 prepare: prepare0
 
-# Leave this as default for preprocessing benos.lds.S, which is now
+# Leave this as default for preprocessing openos.lds.S, which is now
 # done in arch/$(ARCH)/kernel/Makefile
 
-export CPPFLAGS_benos.lds += -P -C -U$(ARCH)
+export CPPFLAGS_openos.lds += -P -C -U$(ARCH)
 
 # FIXME: The asm symlink changes when $(ARCH) changes. That's
 # hard to detect, but I suppose "make mrproper" is a good idea
@@ -515,8 +515,8 @@ include/target/utsrelease.h: include/config/kernel.release FORCE
 # make distclean Remove editor backup files, patch leftover files and the like
 
 # Directories & files removed with 'make clean'
-CLEAN_FILES +=	benos benos.strip benos.map \
-                .tmp_version .tmp_benos* .tmp_benos.map
+CLEAN_FILES +=	openos openos.strip openos.map \
+                .tmp_version .tmp_openos* .tmp_openos.map
 CLEAN_DIRS += include/asm
 
 # Directories & files removed with 'make mrproper'
@@ -530,7 +530,7 @@ MRPROPER_FILES += .config .config.old .version .old_version \
 #
 clean: rm-dirs  := $(CLEAN_DIRS)
 clean: rm-files := $(CLEAN_FILES)
-clean-dirs      := $(addprefix _clean_,$(srctree) $(benos-alldirs))
+clean-dirs      := $(addprefix _clean_,$(srctree) $(openos-alldirs))
 
 PHONY += $(clean-dirs) clean archclean
 $(clean-dirs):

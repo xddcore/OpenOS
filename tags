@@ -7,7 +7,7 @@
 !_TAG_PROGRAM_VERSION	0.0.0	//
 $(KCONFIG_CONFIG)	Makefile	/^$(KCONFIG_CONFIG) include\/config\/auto.conf.cmd: ;$/;"	t	language:Make
 $(addprefix $(obj)/,$(filter-out fixdep,$(always)))	scripts/basic/Makefile	/^$(addprefix $(obj)\/,$(filter-out fixdep,$(always))): $(obj)\/fixdep$/;"	t	language:Make
-$(benos-dirs)	Makefile	/^$(benos-dirs): prepare scripts$/;"	t	language:Make
+$(openos-dirs)	Makefile	/^$(openos-dirs): prepare scripts$/;"	t	language:Make
 $(clean-dirs)	Makefile	/^$(clean-dirs):$/;"	t	language:Make
 $(cmd_files)	Makefile	/^  $(cmd_files): ;	# Do not try to update included dependency files$/;"	t	language:Make
 $(mrproper-dirs)	Makefile	/^$(mrproper-dirs):$/;"	t	language:Make
@@ -15,7 +15,7 @@ $(obj)/%.moc	scripts/kconfig/Makefile	/^$(obj)\/%.moc: $(src)\/%.h$/;"	t	languag
 $(obj)/.tmp_gtkcheck	scripts/kconfig/Makefile	/^$(obj)\/.tmp_gtkcheck:$/;"	t	language:Make
 $(obj)/.tmp_qtcheck	scripts/kconfig/Makefile	/^$(obj)\/.tmp_qtcheck: $(src)\/Makefile$/;"	t	language:Make
 $(obj)/.tmp_qtcheck	scripts/kconfig/Makefile	/^$(obj)\/.tmp_qtcheck:$/;"	t	language:Make
-$(obj)/benos.bin	arch/arm64/boot/Makefile	/^$(obj)\/benos.bin: benos.strip FORCE$/;"	t	language:Make
+$(obj)/openos.bin	arch/arm64/boot/Makefile	/^$(obj)\/openos.bin: openos.strip FORCE$/;"	t	language:Make
 $(obj)/dochecklxdialog	scripts/kconfig/Makefile	/^$(obj)\/dochecklxdialog:$/;"	t	language:Make
 $(obj)/dochecklxdialog	scripts/kconfig/lxdialog/Makefile	/^$(obj)\/dochecklxdialog:$/;"	t	language:Make
 $(obj)/gconf.o	scripts/kconfig/Makefile	/^$(obj)\/gconf.o: $(obj)\/.tmp_gtkcheck$/;"	t	language:Make
@@ -28,16 +28,16 @@ $(obj)/qconf.o	scripts/kconfig/Makefile	/^$(obj)\/qconf.o: $(obj)\/qconf.moc $(o
 $(obj)/version.rel	init/Makefile	/^$(obj)\/version.rel: include\/target\/compile.h$/;"	t	language:Make
 $(obj)/zconf.tab.c	scripts/kconfig/Makefile	/^$(obj)\/zconf.tab.c: $(src)\/zconf.y$/;"	t	language:Make
 $(obj)/zconf.tab.o	scripts/kconfig/Makefile	/^$(obj)\/zconf.tab.o: $(obj)\/lex.zconf.c $(obj)\/zconf.hash.c$/;"	t	language:Make
-$(sort $(benos-init) $(benos-main) $(benos-lds))	Makefile	/^$(sort $(benos-init) $(benos-main) $(benos-lds)): $(benos-dirs) ;$/;"	t	language:Make
+$(sort $(openos-init) $(openos-main) $(openos-lds))	Makefile	/^$(sort $(openos-init) $(openos-main) $(openos-lds)): $(openos-dirs) ;$/;"	t	language:Make
 %	Makefile	/^%:: FORCE$/;"	t	language:Make
 %.tab.c	scripts/kconfig/Makefile	/^%.tab.c: %.y$/;"	t	language:Make
 %_defconfig	scripts/kconfig/Makefile	/^%_defconfig: $(obj)\/conf$/;"	t	language:Make
 %config	Makefile	/^%config: scripts_basic outputmakefile FORCE$/;"	t	language:Make
-.bss	arch/arm64/kernel/benos.lds.S	/^	.bss : { *(.bss*) }$/;"	S	language:LdScript
-.data	arch/arm64/kernel/benos.lds.S	/^	.data : { *(.data) }$/;"	S	language:LdScript
-.rodata	arch/arm64/kernel/benos.lds.S	/^	.rodata : { *(.rodata) }$/;"	S	language:LdScript
-.text	arch/arm64/kernel/benos.lds.S	/^	.text : { *(.text) }$/;"	S	language:LdScript
-.text.boot	arch/arm64/kernel/benos.lds.S	/^	.text.boot : { *(.text.boot) }$/;"	S	language:LdScript
+.bss	arch/arm64/kernel/openos.lds.S	/^	.bss : { *(.bss*) }$/;"	S	language:LdScript
+.data	arch/arm64/kernel/openos.lds.S	/^	.data : { *(.data) }$/;"	S	language:LdScript
+.rodata	arch/arm64/kernel/openos.lds.S	/^	.rodata : { *(.rodata) }$/;"	S	language:LdScript
+.text	arch/arm64/kernel/openos.lds.S	/^	.text : { *(.text) }$/;"	S	language:LdScript
+.text.boot	arch/arm64/kernel/openos.lds.S	/^	.text.boot : { *(.text.boot) }$/;"	S	language:LdScript
 ACS_DARROW	scripts/kconfig/lxdialog/dialog.h	/^#define ACS_DARROW /;"	d	language:C++
 ACS_HLINE	scripts/kconfig/lxdialog/dialog.h	/^#define ACS_HLINE /;"	d	language:C++
 ACS_LLCORNER	scripts/kconfig/lxdialog/dialog.h	/^#define ACS_LLCORNER /;"	d	language:C++
@@ -253,18 +253,18 @@ KBUILD_BUILTIN	Makefile	/^KBUILD_BUILTIN := 1$/;"	m	language:Make
 KBUILD_CHECKSRC	Makefile	/^KBUILD_CHECKSRC = 0$/;"	m	language:Make
 KBUILD_DEFCONFIG	arch/arm64/Makefile	/^KBUILD_DEFCONFIG := defconfig$/;"	m	language:Make
 KBUILD_HAVE_NLS	scripts/kconfig/Makefile	/^KBUILD_HAVE_NLS := $(shell \\$/;"	m	language:Make
-KBUILD_IMAGE	Makefile	/^export KBUILD_IMAGE ?= benos$/;"	m	language:Make
-KBUILD_IMAGE	arch/arm64/Makefile	/^KBUILD_IMAGE	:= benos.bin$/;"	m	language:Make
+KBUILD_IMAGE	Makefile	/^export KBUILD_IMAGE ?= openos$/;"	m	language:Make
+KBUILD_IMAGE	arch/arm64/Makefile	/^KBUILD_IMAGE	:= openos.bin$/;"	m	language:Make
 KBUILD_VERBOSE	Makefile	/^    KBUILD_VERBOSE = $(V)$/;"	m	language:Make
 KBUILD_VERBOSE	Makefile	/^  KBUILD_VERBOSE = 0$/;"	m	language:Make
-KBUILD_VMLINUX_OBJS	Makefile	/^export KBUILD_VMLINUX_OBJS := $(benos-all)$/;"	m	language:Make
+KBUILD_VMLINUX_OBJS	Makefile	/^export KBUILD_VMLINUX_OBJS := $(openos-all)$/;"	m	language:Make
 KCONFIG_CONFIG	Makefile	/^KCONFIG_CONFIG	?= .config$/;"	m	language:Make
 KCONFIG_PROG	scripts/kconfig/prog.h	/^#define KCONFIG_PROG	/;"	d	language:C++
 KERNELRELEASE	Makefile	/^KERNELRELEASE = $(shell cat include\/config\/kernel.release 2> \/dev\/null)$/;"	m	language:Make
 KERNELVERSION	Makefile	/^KERNELVERSION = $(VERSION).$(PATCHLEVEL).$(SUBLEVEL)$(EXTRAVERSION)$/;"	m	language:Make
 KEY_ESC	scripts/kconfig/lxdialog/dialog.h	/^#define KEY_ESC /;"	d	language:C++
 LD	Makefile	/^LD		= $(CROSS_COMPILE)ld$/;"	m	language:Make
-LDFLAGS_benos	arch/arm64/Makefile	/^LDFLAGS_benos	:=-p --no-undefined -X$/;"	m	language:Make
+LDFLAGS_openos	arch/arm64/Makefile	/^LDFLAGS_openos	:=-p --no-undefined -X$/;"	m	language:Make
 LINUXINCLUDE	Makefile	/^LINUXINCLUDE    := \\$/;"	m	language:Make
 LKC_DIRECT_LINK	scripts/kconfig/conf.c	/^#define LKC_DIRECT_LINK$/;"	d	language:C	file:
 LKC_DIRECT_LINK	scripts/kconfig/confdata.c	/^#define LKC_DIRECT_LINK$/;"	d	language:C	file:
@@ -724,7 +724,7 @@ _start	arch/arm64/kernel/head.S	/^_start:$/;"	l	language:Asm
 a_flags	Makefile	/^a_flags = -Wp,-MD,$(depfile) $(AFLAGS) $(AFLAGS_KERNEL) \\$/;"	m	language:Make
 about1	scripts/kconfig/gconf.glade	/^		    <widget class="GtkImageMenuItem" id="about1">$/;"	i	language:Glade
 addColumn	scripts/kconfig/qconf.h	/^	void addColumn(colIdx idx, const QString& label)$/;"	f	language:C++	class:ConfigList	typeref:typename:void	signature:(colIdx idx,const QString & label)
-all	Makefile	/^all: benos$/;"	t	language:Make
+all	Makefile	/^all: openos$/;"	t	language:Make
 all	arch/arm64/Makefile	/^all:	$(KBUILD_IMAGE)$/;"	t	language:Make
 allmodconfig	scripts/kconfig/Makefile	/^allmodconfig: $(obj)\/conf$/;"	t	language:Make
 allnoconfig	scripts/kconfig/Makefile	/^allnoconfig: $(obj)\/conf$/;"	t	language:Make
@@ -760,25 +760,25 @@ backtitle	scripts/kconfig/lxdialog/dialog.h	/^	const char *backtitle;$/;"	m	lang
 basename	scripts/kconfig/lkc_port.h	/^static inline char *basename(const char *path)$/;"	f	language:C++	typeref:typename:char *	signature:(const char * path)
 beginGroup	scripts/kconfig/qconf.h	/^	void beginGroup(const QString& group) { }$/;"	f	language:C++	class:QSettings	typeref:typename:void	signature:(const QString & group)
 begin_reached	scripts/kconfig/lxdialog/textbox.c	/^static int begin_reached, end_reached, page_length;$/;"	v	language:C	typeref:typename:int	file:
-benos	Makefile	/^benos: $(benos-lds) $(benos-init) $(benos-main) FORCE$/;"	t	language:Make
-benos	arch/arm64/boot/Makefile	/^benos := benos.bin$/;"	m	language:Make
-benos-all	Makefile	/^benos-all  := $(benos-init) $(benos-main)$/;"	m	language:Make
-benos-alldirs	Makefile	/^benos-alldirs	:= $(sort $(benos-dirs) $(patsubst %\/,%,$(filter %\/, \\$/;"	m	language:Make
-benos-dirs	Makefile	/^benos-dirs	:= $(patsubst %\/,%,$(filter %\/, $(init-y) $(init-m) \\$/;"	m	language:Make
-benos-init	Makefile	/^benos-init := $(head-y) $(init-y)$/;"	m	language:Make
-benos-lds	Makefile	/^benos-lds  := arch\/$(ARCH)\/kernel\/benos.lds$/;"	m	language:Make
-benos-main	Makefile	/^benos-main := $(core-y) $(libs-y) $(drivers-y)$/;"	m	language:Make
-benos-map	Makefile	/^benos-map  := benos.map$/;"	m	language:Make
-benos.bin	arch/arm64/Makefile	/^benos.bin: benos$/;"	t	language:Make
-benos.strip	arch/arm64/boot/Makefile	/^benos.strip: benos FORCE$/;"	t	language:Make
+openos	Makefile	/^openos: $(openos-lds) $(openos-init) $(openos-main) FORCE$/;"	t	language:Make
+openos	arch/arm64/boot/Makefile	/^openos := openos.bin$/;"	m	language:Make
+openos-all	Makefile	/^openos-all  := $(openos-init) $(openos-main)$/;"	m	language:Make
+openos-alldirs	Makefile	/^openos-alldirs	:= $(sort $(openos-dirs) $(patsubst %\/,%,$(filter %\/, \\$/;"	m	language:Make
+openos-dirs	Makefile	/^openos-dirs	:= $(patsubst %\/,%,$(filter %\/, $(init-y) $(init-m) \\$/;"	m	language:Make
+openos-init	Makefile	/^openos-init := $(head-y) $(init-y)$/;"	m	language:Make
+openos-lds	Makefile	/^openos-lds  := arch\/$(ARCH)\/kernel\/openos.lds$/;"	m	language:Make
+openos-main	Makefile	/^openos-main := $(core-y) $(libs-y) $(drivers-y)$/;"	m	language:Make
+openos-map	Makefile	/^openos-map  := openos.map$/;"	m	language:Make
+openos.bin	arch/arm64/Makefile	/^openos.bin: openos$/;"	t	language:Make
+openos.strip	arch/arm64/boot/Makefile	/^openos.strip: openos FORCE$/;"	t	language:Make
 bg	scripts/kconfig/lxdialog/dialog.h	/^	int bg;		\/* background *\/$/;"	m	language:C++	struct:dialog_color	typeref:typename:int
 bindtextdomain	scripts/kconfig/lkc.h	/^# define bindtextdomain(/;"	d	language:C++	signature:(Domainname,Dirname)
 bool	scripts/kconfig/lkc_port.h	/^#define bool /;"	d	language:C++
 boot	arch/arm64/Makefile	/^boot := arch\/arm64\/boot$/;"	m	language:Make
 border	scripts/kconfig/lxdialog/dialog.h	/^	struct dialog_color border;$/;"	m	language:C++	struct:dialog_info	typeref:struct:dialog_color
 browsed	scripts/kconfig/gconf.c	/^static struct menu *browsed; \/\/ browsed node for SPLIT view$/;"	v	language:C	typeref:struct:menu *	file:
-bss_begin	arch/arm64/kernel/benos.lds.S	/^	bss_begin = .;$/;"	s	language:LdScript
-bss_end	arch/arm64/kernel/benos.lds.S	/^	bss_end = .;$/;"	s	language:LdScript
+bss_begin	arch/arm64/kernel/openos.lds.S	/^	bss_begin = .;$/;"	s	language:LdScript
+bss_end	arch/arm64/kernel/openos.lds.S	/^	bss_end = .;$/;"	s	language:LdScript
 buf	scripts/kconfig/lxdialog/textbox.c	/^static const char *buf;$/;"	v	language:C	typeref:typename:const char *	file:
 buffer	scripts/kconfig/lex.zconf.c	/^struct buffer {$/;"	s	language:C	file:
 build_conf	scripts/kconfig/mconf.c	/^static void build_conf(struct menu *menu)$/;"	f	language:C	typeref:typename:void	file:	signature:(struct menu * menu)
@@ -829,14 +829,14 @@ clean	Makefile	/^clean := -f $(if $(KBUILD_SRC),$(srctree)\/)scripts\/Makefile.c
 clean	Makefile	/^clean: archclean $(clean-dirs)$/;"	t	language:Make
 clean	Makefile	/^clean: rm-dirs  := $(CLEAN_DIRS)$/;"	t	language:Make
 clean	Makefile	/^clean: rm-files := $(CLEAN_FILES)$/;"	t	language:Make
-clean-dirs	Makefile	/^clean-dirs      := $(addprefix _clean_,$(srctree) $(benos-alldirs))$/;"	m	language:Make
+clean-dirs	Makefile	/^clean-dirs      := $(addprefix _clean_,$(srctree) $(openos-alldirs))$/;"	m	language:Make
 clean-files	init/Makefile	/^clean-files := ..\/include\/target\/compile.h$/;"	m	language:Make
 clean-files	scripts/kconfig/Makefile	/^clean-files	:= lkc_defs.h qconf.moc .tmp_qtcheck \\$/;"	m	language:Make
 clear_config	scripts/basic/fixdep.c	/^void clear_config(void)$/;"	f	language:C	typeref:typename:void	signature:(void)
 closeEvent	scripts/kconfig/qconf.cc	/^void ConfigMainWindow::closeEvent(QCloseEvent* e)$/;"	f	language:C++	class:ConfigMainWindow	typeref:typename:void	signature:(QCloseEvent * e)
 cmd_as_o_S	Makefile	/^cmd_as_o_S       = $(CC) $(a_flags) -c -o $@ $<$/;"	m	language:Make
-cmd_benos	Makefile	/^      cmd_benos = $(LD) $(LDFLAGS) $(LDFLAGS_benos) -o $@ \\$/;"	m	language:Make
-cmd_benos_version	Makefile	/^      cmd_benos_version = set -e;                        \\$/;"	m	language:Make
+cmd_openos	Makefile	/^      cmd_openos = $(LD) $(LDFLAGS) $(LDFLAGS_openos) -o $@ \\$/;"	m	language:Make
+cmd_openos_version	Makefile	/^      cmd_openos_version = set -e;                        \\$/;"	m	language:Make
 cmd_files	Makefile	/^cmd_files := $(wildcard .*.cmd $(foreach f,$(targets),$(dir $(f)).$(notdir $(f)).cmd))$/;"	m	language:Make
 cmd_rmdirs	Makefile	/^      cmd_rmdirs = rm -rf $(rm-dirs)$/;"	m	language:Make
 cmd_rmfiles	Makefile	/^      cmd_rmfiles = rm -f $(rm-files)$/;"	m	language:Make
@@ -1035,7 +1035,7 @@ expr_trans_compare	scripts/kconfig/expr.c	/^struct expr *expr_trans_compare(stru
 expr_transform	scripts/kconfig/expr.c	/^struct expr *expr_transform(struct expr *e)$/;"	f	language:C	typeref:struct:expr *	signature:(struct expr * e)
 expr_type	scripts/kconfig/expr.h	/^enum expr_type {$/;"	g	language:C++
 expr_value	scripts/kconfig/expr.h	/^struct expr_value {$/;"	s	language:C++
-extra-y	arch/arm64/kernel/Makefile	/^extra-y	:= $(head-y) benos.lds$/;"	m	language:Make
+extra-y	arch/arm64/kernel/Makefile	/^extra-y	:= $(head-y) openos.lds$/;"	m	language:Make
 false	scripts/kconfig/lkc_port.h	/^#define false /;"	d	language:C++
 fg	scripts/kconfig/lxdialog/dialog.h	/^	int fg;		\/* foreground *\/$/;"	m	language:C++	struct:dialog_color	typeref:typename:int
 file	scripts/kconfig/expr.h	/^	struct file *file;$/;"	m	language:C++	struct:menu	typeref:struct:file *
@@ -1537,8 +1537,8 @@ qgettext	scripts/kconfig/qconf.cc	/^static inline QString qgettext(const char* s
 quiet	Makefile	/^  quiet =$/;"	m	language:Make
 quiet	Makefile	/^  quiet=quiet_$/;"	m	language:Make
 quiet_cmd_as_o_S	Makefile	/^quiet_cmd_as_o_S = AS      $@$/;"	m	language:Make
-quiet_cmd_benos	Makefile	/^quiet_cmd_benos = LD      $@$/;"	m	language:Make
-quiet_cmd_benos_version	Makefile	/^quiet_cmd_benos_version = GEN     .version$/;"	m	language:Make
+quiet_cmd_openos	Makefile	/^quiet_cmd_openos = LD      $@$/;"	m	language:Make
+quiet_cmd_openos_version	Makefile	/^quiet_cmd_openos_version = GEN     .version$/;"	m	language:Make
 quiet_cmd_rmdirs	Makefile	/^quiet_cmd_rmdirs = $(if $(wildcard $(rm-dirs)),CLEAN   $(wildcard $(rm-dirs)))$/;"	m	language:Make
 quiet_cmd_rmfiles	Makefile	/^quiet_cmd_rmfiles = $(if $(wildcard $(rm-files)),CLEAN   $(wildcard $(rm-files)))$/;"	m	language:Make
 quiet_cmd_strip	arch/arm64/boot/Makefile	/^quiet_cmd_strip     = STRIP   $@$/;"	m	language:Make
@@ -1578,7 +1578,7 @@ rootEntry	scripts/kconfig/qconf.h	/^	struct menu *rootEntry;$/;"	m	language:C++	
 rootmenu	scripts/kconfig/menu.c	/^struct menu rootmenu;$/;"	v	language:C	typeref:struct:menu
 rows	scripts/kconfig/mconf.c	/^static int rows = 0, cols = 0;$/;"	v	language:C	typeref:typename:int	file:
 rtrim	scripts/checkpatch.pl	/^sub rtrim {$/;"	s	language:Perl
-rule_benos	Makefile	/^define rule_benos$/;"	m	language:Make
+rule_openos	Makefile	/^define rule_openos$/;"	m	language:Make
 run	arch/arm64/Makefile	/^run:$/;"	t	language:Make
 s	scripts/kconfig/lkc.h	/^	char  *s;$/;"	m	language:C++	struct:gstr	typeref:typename:char *
 sanitise_line	scripts/checkpatch.pl	/^sub sanitise_line {$/;"	s	language:Perl

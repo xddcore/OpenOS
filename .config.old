@@ -1,0 +1,15 @@
+#
+# Automatically generated make config: don't edit
+# OpenOS version: 0.0.1
+# Wed May 24 01:21:00 2023
+#
+CONFIG_ARM64=y
+CONFIG_64BIT=y
+# CONFIG_ARCH_BCM2835 is not set
+CONFIG_ARCH_VEXPRESS=y
+# CONFIG_ARCH_QEMU_AARCH64 is not set
+# CONFIG_BOARD_PI3B is not set
+CONFIG_BOARD_PI4B=y
+CONFIG_LAB2_1=y
+CONFIG_VERSION_2_0=y
+# CONFIG_NONE is not set

@@ -1,0 +1,123 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000000080000                . = 0x80000
+
+.text.boot      0x0000000000080000       0xb0
+ *(.text.boot)
+ .text.boot     0x0000000000080000       0xb0 arch/arm64/kernel/head.o
+                0x0000000000080000                _start
+
+.text           0x00000000000800b0      0x2a8
+ *(.text)
+ .text          0x00000000000800b0        0x0 arch/arm64/kernel/head.o
+ .text          0x00000000000800b0       0x30 init/built-in.lib
+                0x00000000000800b0                kernel_main
+ .text          0x00000000000800e0       0x10 arch/arm64/kernel/built-in.lib
+                0x00000000000800e0                memzero
+ .text          0x00000000000800f0      0x268 arch/arm64/mach-rpi/built-in.lib
+                0x0000000000080120                uart_send
+                0x0000000000080170                uart_recv
+                0x00000000000801b8                uart_send_string
+                0x0000000000080210                uart_init
+
+.iplt           0x0000000000080358        0x0
+ .iplt          0x0000000000080358        0x0 arch/arm64/kernel/head.o
+
+.rodata         0x0000000000080358       0x28
+ *(.rodata)
+ .rodata        0x0000000000080358       0x28 init/built-in.lib
+
+.eh_frame       0x0000000000080380       0xb0
+ .eh_frame      0x0000000000080380       0x30 init/built-in.lib
+                                         0x2c (size before relaxing)
+ *fill*         0x00000000000803b0        0x0 
+ .eh_frame      0x00000000000803b0       0x80 arch/arm64/mach-rpi/built-in.lib
+                                         0x94 (size before relaxing)
+
+.rela.dyn       0x0000000000080430        0x0
+ .rela.text.boot
+                0x0000000000080430        0x0 arch/arm64/kernel/head.o
+ .rela.iplt     0x0000000000080430        0x0 arch/arm64/kernel/head.o
+
+.data           0x0000000000080430        0x0
+ *(.data)
+ .data          0x0000000000080430        0x0 arch/arm64/kernel/head.o
+ .data          0x0000000000080430        0x0 init/built-in.lib
+ .data          0x0000000000080430        0x0 arch/arm64/kernel/built-in.lib
+ .data          0x0000000000080430        0x0 arch/arm64/mach-rpi/built-in.lib
+
+.igot.plt       0x0000000000080430        0x0
+ .igot.plt      0x0000000000080430        0x0 arch/arm64/kernel/head.o
+                0x0000000000080430                . = ALIGN (0x8)
+                0x0000000000080430                bss_begin = .
+
+.bss            0x0000000000080430        0x0
+ *(.bss*)
+ .bss           0x0000000000080430        0x0 arch/arm64/kernel/head.o
+ .bss           0x0000000000080430        0x0 init/built-in.lib
+ .bss           0x0000000000080430        0x0 arch/arm64/kernel/built-in.lib
+ .bss           0x0000000000080430        0x0 arch/arm64/mach-rpi/built-in.lib
+                0x0000000000080430                bss_end = .
+LOAD arch/arm64/kernel/head.o
+LOAD init/built-in.lib
+START GROUP
+LOAD arch/arm64/kernel/built-in.lib
+LOAD arch/arm64/mach-rpi/built-in.lib
+END GROUP
+OUTPUT(openos elf64-littleaarch64)
+LOAD linker stubs
+
+.debug_line     0x0000000000000000      0x212
+ .debug_line    0x0000000000000000       0x6b arch/arm64/kernel/head.o
+ .debug_line    0x000000000000006b       0x4d init/built-in.lib
+ .debug_line    0x00000000000000b8       0x4b arch/arm64/kernel/built-in.lib
+ .debug_line    0x0000000000000103      0x10f arch/arm64/mach-rpi/built-in.lib
+
+.debug_info     0x0000000000000000      0x3ec
+ .debug_info    0x0000000000000000       0x2e arch/arm64/kernel/head.o
+ .debug_info    0x000000000000002e       0x48 init/built-in.lib
+ .debug_info    0x0000000000000076       0x2e arch/arm64/kernel/built-in.lib
+ .debug_info    0x00000000000000a4      0x348 arch/arm64/mach-rpi/built-in.lib
+
+.debug_abbrev   0x0000000000000000      0x13e
+ .debug_abbrev  0x0000000000000000       0x14 arch/arm64/kernel/head.o
+ .debug_abbrev  0x0000000000000014       0x2e init/built-in.lib
+ .debug_abbrev  0x0000000000000042       0x14 arch/arm64/kernel/built-in.lib
+ .debug_abbrev  0x0000000000000056       0xe8 arch/arm64/mach-rpi/built-in.lib
+
+.debug_aranges  0x0000000000000000       0xc0
+ .debug_aranges
+                0x0000000000000000       0x30 arch/arm64/kernel/head.o
+ .debug_aranges
+                0x0000000000000030       0x30 init/built-in.lib
+ .debug_aranges
+                0x0000000000000060       0x30 arch/arm64/kernel/built-in.lib
+ .debug_aranges
+                0x0000000000000090       0x30 arch/arm64/mach-rpi/built-in.lib
+
+.debug_str      0x0000000000000000      0x151
+ .debug_str     0x0000000000000000       0x3a arch/arm64/kernel/head.o
+ .debug_str     0x000000000000003a       0x92 init/built-in.lib
+                                         0xa7 (size before relaxing)
+ .debug_str     0x00000000000000cc       0x17 arch/arm64/kernel/built-in.lib
+                                         0x38 (size before relaxing)
+ .debug_str     0x00000000000000e3       0x6e arch/arm64/mach-rpi/built-in.lib
+                                         0xfd (size before relaxing)
+
+.comment        0x0000000000000000       0x24
+ .comment       0x0000000000000000       0x24 init/built-in.lib
+                                         0x25 (size before relaxing)
+ .comment       0x0000000000000024       0x25 arch/arm64/mach-rpi/built-in.lib
+
+.note.GNU-stack
+                0x0000000000000000        0x0
+ .note.GNU-stack
+                0x0000000000000000        0x0 init/built-in.lib
+ .note.GNU-stack
+                0x0000000000000000        0x0 arch/arm64/mach-rpi/built-in.lib

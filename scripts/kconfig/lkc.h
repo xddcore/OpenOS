@@ -31,7 +31,7 @@ extern "C" {
 
 #define SRCTREE "srctree"
 
-#define PACKAGE "benos"
+#define PACKAGE "openos"
 #define LOCALEDIR "/usr/share/locale"
 
 #define _(text) gettext(text)

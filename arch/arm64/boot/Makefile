@@ -11,14 +11,14 @@
 # Copyright (C) 2009 Lv Zheng
 #
 
-benos := benos.bin
+openos := openos.bin
 
 quiet_cmd_strip     = STRIP   $@
       cmd_strip     = $(STRIP) -R .comment -R .note $< -o $@
 
-benos.strip: benos FORCE
+openos.strip: openos FORCE
 	$(call if_changed,strip)
 
-$(obj)/benos.bin: benos.strip FORCE
+$(obj)/openos.bin: openos.strip FORCE
 	$(call if_changed,objcopy)
 	@echo '  Kernel: $@ is ready'
