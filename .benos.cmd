@@ -1,1 +1,0 @@
-cmd_openos := aarch64-linux-gnu-ld  -p --no-undefined -X -o openos -T arch/arm64/kernel/openos.lds -Map openos.map arch/arm64/kernel/head.o  init/built-in.lib --start-group  arch/arm64/kernel/built-in.lib  arch/arm64/mach-rpi/built-in.lib   --end-group 
