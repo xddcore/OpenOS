@@ -1,0 +1,79 @@
+config ARM64
+	def_bool y
+	help
+	  ARM 64-bit (AArch64) support.
+
+config 64BIT
+	def_bool y
+
+choice
+	prompt"Platform selection"
+	default ARCH_BCM2835
+	help
+	  Platform selection.
+
+config ARCH_BCM2835
+	bool "Broadcom BCM2835 family"
+	help
+	This enables support for the Broadcom BCM2837 and BCM2711 SoC.
+	These SoCs are used in the Raspberry Pi 3 and 4 devices.
+
+config ARCH_VEXPRESS
+	bool "ARMv8 software model (Versatile Express)"
+	help
+	This enables support for the ARMv8 software model (Versatile
+	Express).
+
+config ARCH_QEMU_AARCH64
+	bool "QEMU_AARCH64"
+	help
+	This enables support for the QEMU AARCH64
+endchoice
+
+choice
+	prompt "Board selection"
+	default BOARD_PI3B
+
+config BOARD_PI3B
+	bool "Raspberry 3B"
+
+config BOARD_PI4B
+	bool "Raspberry 4B"
+endchoice
+
+choice
+	prompt "Uart for Pi"
+	default PI_MINI_UART
+	depends on ARCH_BCM2835
+
+config PI_MINI_UART
+	bool "mini_uart"
+
+config PI_PL_UART
+	bool "pl_uart"
+endchoice
+
+choice
+	prompt "ASM Lab Choice"
+	default LAB2_1
+
+config LAB2_1
+	bool "lab2_1"
+
+endchoice
+
+
+choice
+	prompt "OpenNNA"
+	default VERSION_2_0
+
+config VERSION_2_0
+	bool "version_2_0"
+
+config NONE
+	bool "none"
+endchoice
+
+
+#source "kernel/Kconfig"
+source "init/Kconfig"
