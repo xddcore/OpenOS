@@ -6,8 +6,8 @@ NAME = openos
 
 MAKEFLAGS += -rR --no-print-directory
 
-# To put more focus on warnings, be less verbose as default
-# Use 'make V=1' to see the full commands
+# 为了更加关注警告，默认情况下不那么冗长
+# 使用'make V=1'查看完整命令
 ifdef V
   ifeq ("$(origin V)", "command line")
     KBUILD_VERBOSE = $(V)
@@ -19,7 +19,7 @@ endif
 
 KBUILD_CHECKSRC = 0
 
-# Beautify output
+# 美化输出
 ifeq ($(KBUILD_VERBOSE),1)
   quiet =
   Q =
@@ -30,17 +30,17 @@ endif
 
 export quiet Q KBUILD_VERBOSE
 
-# We process the rest of the Makefile if this is the final invocation of make
+# 如果这是 make 的最终调用，我们处理 Makefile 的其余部分
 ifeq ($(skip-makefile),)
 
-# If building an external module we do not care about the all: rule
-# but instead _all depend on modules
+# 如果构建一个外部模块，我们不关心 all: 规则
+# 但是 _all 依赖于模块
 PHONY += all
 _all: all
 
 srctree		:= $(if $(KBUILD_SRC),$(KBUILD_SRC),$(CURDIR))
 TOPDIR		:= $(srctree)
-# FIXME - TOPDIR is obsolete, use srctree/objtree
+# FIXME -TOPDIR 已过时，请使用 srctree/objtree
 objtree		:= $(CURDIR)
 src		:= $(srctree)
 obj		:= $(objtree)
@@ -50,7 +50,7 @@ VPATH		:= $(srctree)
 export srctree objtree VPATH TOPDIR
 
 
-# SUBARCH tells the usermode build what the underlying arch is.
+# SUBARCH 告诉用户模式构建底层架构是什么。
 
 SUBARCH := arm64
 SUBARCH_CROSS_COMPILE := aarch64-linux-gnu-
@@ -58,13 +58,13 @@ SUBARCH_CROSS_COMPILE := aarch64-linux-gnu-
 ARCH		?= $(SUBARCH)
 CROSS_COMPILE	?= $(SUBARCH_CROSS_COMPILE)
 
-# Architecture as present in compile.h
+# compile.h 中的架构
 SRCARCH         := $(ARCH)
 UTS_MACHINE := $(ARCH)
 
 KCONFIG_CONFIG	?= .config
 
-# SHELL used by kbuild
+# kbuild 使用的 SHELL
 CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	  else if [ -x /bin/bash ]; then echo /bin/bash; \
 	  else echo sh; fi ; fi)
@@ -75,8 +75,8 @@ HOSTINCLUDE  = -Iinclude
 HOSTCFLAGS   = -Wall -Wstrict-prototypes -O2 -fomit-frame-pointer $(HOSTINCLUDE)
 HOSTCXXFLAGS = -O2
 
-# Decide whether to build built-in, modular, or both.
-# Normally, just do built-in.
+# 决定是构建内置的、模块化的还是两者兼而有之。
+# 通常，只做内置的.
 
 KBUILD_BUILTIN := 1
 
@@ -86,28 +86,28 @@ export KBUILD_CHECKSRC KBUILD_SRC
 
 hdr-arch  := $(SRCARCH)
 
-# Look for make include files relative to root of kernel src
+# 寻找相对于内核 src 根目录的 make include 文件
 MAKEFLAGS += --include-dir=$(srctree)
 
-# We need some generic definitions.
+# 我们需要一些通用的定义。
 #include $(srctree)/arch/$(ARCH)/Kbuild.include
 include $(srctree)/scripts/Kbuild.include
 
-# Use TARGETINCLUDE when you must reference the include/ directory.
-# Needed to be compatible with the O= option
+# 当必须引用 include/目录时使用 TARGETINCLUDE。
+# 需要与 O= 选项兼容
 TARGETINCLUDE   := -Iinclude -Iinclude/std \
                    -include $(srctree)/include/target/config.h \
                    $(if $(KBUILD_SRC),-Iinclude2 -I$(srctree)/include)
 
-# Use USERINCLUDE when you must reference the UAPI directories only.
+# 当你必须只引用 UAPI 目录时使用 USERINCLUDE。
 USERINCLUDE    := \
 		-I$(srctree)/arch/$(hdr-arch)/include/uapi \
 		-Iarch/$(hdr-arch)/include/generated/uapi \
 		-I$(srctree)/include/uapi \
 		-Iinclude/generated/uapi
 
-# Use LINUXINCLUDE when you must reference the include/ directory.
-# Needed to be compatible with the O= option
+# 当必须引用 include/目录时使用 LINUXINCLUDE。
+# 需要与 O= 选项兼容
 LINUXINCLUDE    := \
 		-I$(srctree)/arch/$(hdr-arch)/include \
 		-Iarch/$(hdr-arch)/include/generated/uapi \
@@ -119,7 +119,7 @@ LINUXINCLUDE    := \
 
 export LINUXINCLUDE
 
-# Make variables (CC, etc...)
+# 生成变量（CC 等...）
 
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
@@ -142,7 +142,7 @@ CHECKFLAGS     := -D__STDC__ $(CF)
 CFLAGS_KERNEL	=
 AFLAGS_KERNEL	=
 
-# Read KERNELRELEASE from include/config/kernel.release (if it exists)
+# 从 include/config/kernel.release 读取 KERNELRELEASE（如果它存在）
 KERNELRELEASE = $(shell cat include/config/kernel.release 2> /dev/null)
 KERNELVERSION = $(VERSION).$(PATCHLEVEL).$(SUBLEVEL)$(EXTRAVERSION)
 
@@ -155,7 +155,7 @@ export CPPFLAGS NOSTDINC_FLAGS TARGETINCLUDE OBJCOPYFLAGS LDFLAGS
 export CFLAGS CFLAGS_KERNEL
 export AFLAGS AFLAGS_KERNEL
 
-# Files to ignore in find ... statements
+# 在 find ... 语句中忽略的文件
 
 RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o -name CVS -o -name .pc -o -name .hg -o -name .git \) -prune -o
 export RCS_TAR_IGNORE := --exclude SCCS --exclude BitKeeper --exclude .svn --exclude CVS --exclude .pc --exclude .hg --exclude .git
@@ -168,22 +168,22 @@ scripts_basic:
 scripts/basic/%: scripts_basic ;
 
 PHONY += outputmakefile
-# outputmakefile generates a Makefile in the output directory, if using a
-# separate output directory. This allows convenient use of make in the
-# output directory.
+# outputmakefile 在输出目录中生成一个 Makefile，如果使用
+# 单独的输出目录。这允许在
+# 输出目录。
 outputmakefile:
 ifneq ($(KBUILD_SRC),)
 	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/mkmakefile \
 	    $(srctree) $(objtree) $(VERSION) $(PATCHLEVEL)
 endif
 
-# To make sure we do not include .config for any of the *config targets
-# catch them early, and hand them over to scripts/kconfig/Makefile
-# It is allowed to specify more targets when calling make, including
-# mixing *config targets and build targets.
-# For example 'make oldconfig all'.
-# Detect when mixed targets is specified, and make a second invocation
-# of make so .config is not included in this case either (for *config).
+# 确保我们不为任何 *config 目标包含 .config
+# 尽早捕获它们，并将它们交给 scripts/kconfig/Makefile
+# 调用make时允许指定更多的目标，包括
+# 混合 *config 目标和构建目标。
+# 例如'make oldconfig all'。
+# 检测何时指定了混合目标，并进行第二次调用
+# of make so .config 也不包括在这种情况下（对于 *config）。
 
 no-dot-config-targets := clean mrproper distclean \
 			 cscope TAGS tags help %docs check% \
@@ -209,8 +209,8 @@ endif
 
 ifeq ($(mixed-targets),1)
 # ===========================================================================
-# We're called with mixed targets (*config and build targets).
-# Handle them one by one.
+# 我们被称为混合目标（*配置和构建目标）。
+# 一一处理。
 
 %:: FORCE
 	$(Q)$(MAKE) -C $(srctree) KBUILD_SRC= $@
@@ -218,12 +218,12 @@ ifeq ($(mixed-targets),1)
 else
 ifeq ($(config-targets),1)
 # ===========================================================================
-# *config targets only - make sure prerequisites are updated, and descend
-# in scripts/kconfig to make the *config target
+# *仅配置目标 -确保先决条件已更新，然后下降
+# 在 scripts/kconfig 中创建 *config 目标
 
-# Read arch specific Makefile to set KBUILD_DEFCONFIG as needed.
-# KBUILD_DEFCONFIG may point out an alternative default configuration
-# used for 'make defconfig'
+# 阅读 arch 特定的 Makefile 以根据需要设置 KBUILD_DEFCONFIG。
+# KBUILD_DEFCONFIG 可能会指出一个替代的默认配置
+# 用于'make defconfig'
 include $(srctree)/arch/$(ARCH)/Makefile
 export KBUILD_DEFCONFIG
 
@@ -237,49 +237,49 @@ config: scripts_basic outputmakefile FORCE
 
 else
 # ===========================================================================
-# Build targets only - this includes kernel, arch specific targets, clean
-# targets and others. In general all targets except *config targets.
+# 仅构建目标 -这包括内核、arch 特定目标、clean
+# 目标和其他。一般来说，除了 *config 目标之外的所有目标。
 
-# Additional helpers built in scripts/
-# Carefully list dependencies so we do not try to build scripts twice
-# in parallel
+# 内置脚本的额外助手/
+# 仔细列出依赖项，这样我们就不会尝试构建脚本两次
+# 在平行下
 PHONY += scripts
 scripts: scripts_basic include/config/auto.conf
 	$(Q)$(MAKE) $(build)=$(@)
 
-# Objects we will link into kernel / subdirs we need to visit
+# 我们将链接到我们需要访问的内核/子目录的对象
 init-y		:= init/
 #libs-y		:= lib/
 #drivers-y	:= drivers/
 core-y		:=
 
 ifeq ($(dot-config),1)
-# Read in config
+# 读入配置
 -include include/config/auto.conf
 
-# Read in dependencies to all Kconfig* files, make sure to run
-# oldconfig if changes are detected.
+# 读取所有 Kconfig*文件的依赖关系，确保运行
+# oldconfig 如果检测到更改。
 -include include/config/auto.conf.cmd
 
-# To avoid any implicit rule to kick in, define an empty command
+# 为避免任何隐式规则生效，定义一个空命令
 $(KCONFIG_CONFIG) include/config/auto.conf.cmd: ;
 
-# If .config is newer than include/config/auto.conf, someone tinkered
-# with it and forgot to run make oldconfig.
-# if auto.conf.cmd is missing then we are probably in a cleaned tree so
-# we execute the config step to be sure to catch updated Kconfig files
+# 如果 .config 比 include/config/auto.conf 更新，有人修改过
+# 用它忘了运行 make oldconfig。
+# 如果 auto.conf.cmd 丢失那么我们可能在一个干净的树中所以
+# 我们执行配置步骤以确保捕获更新的 Kconfig 文件
 include/config/auto.conf: $(KCONFIG_CONFIG) include/config/auto.conf.cmd
 	$(Q)$(MAKE) -f $(srctree)/Makefile silentoldconfig
 
 else
-# Dummy target needed, because used as prerequisite
+# 需要虚拟目标，因为用作先决条件
 include/config/auto.conf: ;
 endif # $(dot-config)
 
-# The all: target is the default when no target is given on the
-# command line.
-# This allow a user to issue only 'make' to build a kernel
-# Defaults openos but it is usually overridden in the arch makefile
+# all: target 是默认的，当没有给定目标时
+# 命令行。
+# 这允许用户仅发出“make”来构建内核
+# 默认 openos 但它通常在 arch makefile 中被覆盖
 all: openos
 
 include $(srctree)/arch/$(ARCH)/Makefile
@@ -304,14 +304,14 @@ NOSTDINC_FLAGS += -nostdinc -nostdlib
 
 CHECKFLAGS     += $(NOSTDINC_FLAGS)
 
-# Default openos image to build when no specific target is given.
-# KBUILD_IMAGE may be overruled on the command line or
-# set in the environment
+# 未指定特定目标时要构建的默认 openos 映像。
+# KBUILD_IMAGE 可以在命令行或
+# 在环境中设置
 export KBUILD_IMAGE ?= openos
 
 #
-# INSTALL_PATH specifies where to place the updated kernel and map
-# images. Default is /boot, but you can set it to other values
+# INSTALL_PATH 指定放置更新内核和映射的位置
+# 图片。默认为 /boot，但您可以将其设置为其他值
 export	INSTALL_PATH ?= /boot
 
 core-y		+= # kernel/ mm/
@@ -332,12 +332,12 @@ libs-y		:= $(patsubst %/, %/built-in.lib, $(libs-y))
 core-y		:= $(patsubst %/, %/built-in.lib, $(core-y))
 drivers-y	:= $(patsubst %/, %/built-in.lib, $(drivers-y))
 
-# Build kernel
+# 构建内核
 # ---------------------------------------------------------------------------
-# openos is built from the objects selected by $(openos-init) and
-# $(openos-main). Most are built-in.lib files from top-level directories
-# in the kernel tree, others are specified in arch/$(ARCH)/Makefile.
-# Ordering when linking is important, and $(openos-init) must be first.
+# openos 是根据 $(openos-init) 和选择的对象构建的
+# $(openos-main).大多数是顶级目录中的 built-in.lib 文件
+# 在内核树中，其他在arch/$(ARCH)/Makefile中指定。
+# 链接时的顺序很重要，$(openos-init) 必须在第一位。
 #
 # openos
 #   ^
@@ -348,12 +348,12 @@ drivers-y	:= $(patsubst %/, %/built-in.lib, $(drivers-y))
 #   +--< $(openos-main)
 #        +--< driver/built-in.lib mm/built-in.lib + more
 #
-# kernel version (uname -v) cannot be updated during normal
-# descending-into-subdirs phase since we do not yet know if we need to
-# update kernel.
-# Therefore this step is delayed until just before final link of kernel.
+# 内核版本（uname -v）在正常情况下无法更新
+# descending-into-subdirs 阶段，因为我们还不知道是否需要
+# 更新内核。
+# 因此这一步被延迟到内核的最终链接之前。
 #
-# System.map is generated to document addresses of all kernel symbols
+# 生成System.map记录所有内核符号的地址
 
 openos-init := $(head-y) $(init-y)
 openos-main := $(core-y) $(libs-y) $(drivers-y)
@@ -362,7 +362,7 @@ openos-lds  := arch/$(ARCH)/kernel/openos.lds
 openos-map  := openos.map
 export KBUILD_VMLINUX_OBJS := $(openos-all)
 
-# Generate new kernel version
+# 生成新的内核版本
 quiet_cmd_openos_version = GEN     .version
       cmd_openos_version = set -e;                        \
 	if [ ! -r .version ]; then			\
@@ -374,7 +374,7 @@ quiet_cmd_openos_version = GEN     .version
 	fi;						\
 	$(MAKE) $(build)=init
 
-# The finally linked kernel.
+# 最终链接的内核。
 quiet_cmd_openos = LD      $@
       cmd_openos = $(LD) $(LDFLAGS) $(LDFLAGS_openos) -o $@ \
 	-T $(openos-lds) -Map $(openos-map) $(openos-init) \
@@ -386,26 +386,26 @@ define rule_openos
 	$(Q)echo 'cmd_$@ := $(cmd_openos)' > $(dot-target).cmd
 endef
 
-# kernel image - including updated kernel symbols
+# 内核映像——包括更新的内核符号
 openos: $(openos-lds) $(openos-init) $(openos-main) FORCE
 	$(call if_changed_rule,openos)
 	$(Q)rm -f .old_version
 
-# The actual objects are generated when descending,
-# make sure no implicit rule kicks in
+# 实际对象是在下降时生成的，
+# 确保没有隐式规则启动
 $(sort $(openos-init) $(openos-main) $(openos-lds)): $(openos-dirs) ;
 
-# Handle descending into subdirectories listed in $(openos-dirs)
-# Preset locale variables to speed up the build process. Limit locale
-# tweaks to this spot to avoid wrong language settings when running
-# make menuconfig etc.
-# Error messages still appears in the original language
+# 处理下降到 $(openos-dirs) 中列出的子目录
+# 预设语言环境变量以加快构建过程。限制语言环境
+# 调整这个位置以避免运行时错误的语言设置
+# 制作菜单配置等
+# 错误信息仍然以原始语言显示
 
 PHONY += $(openos-dirs)
 $(openos-dirs): prepare scripts
 	$(Q)$(MAKE) $(build)=$@
 
-# Build the kernel release string
+# 构建内核发布字符串
 pattern = ".*/localversion[^~]*"
 string  = $(shell cat /dev/null \
 	   `find $(objtree) $(srctree) -maxdepth 1 -regex $(pattern) | sort -u`)
@@ -413,13 +413,13 @@ string  = $(shell cat /dev/null \
 localver = $(subst $(space),, $(string) \
 			      $(patsubst "%",%,$(CONFIG_LOCALVERSION)))
 
-# If CONFIG_LOCALVERSION_AUTO is set scripts/setlocalversion is called
-# and if the SCM is know a tag from the SCM is appended.
-# The appended tag is determined by the SCM used.
+#如果设置了 CONFIG_LOCALVERSION_AUTO scripts/setlocalversion 被调用
+#如果 SCM 已知，则附加来自 SCM 的标签。
+#附加标签由使用的 SCM 决定。
 #
-# Currently, only git is supported.
-# Other SCMs can edit scripts/setlocalversion and add the appropriate
-# checks as needed.
+#目前，仅支持 git。
+#其他 SCM 可以编辑 scripts/setlocalversion 添加合适的
+#根据需要检查。
 ifdef CONFIG_LOCALVERSION_AUTO
 	_localver-auto = $(shell $(CONFIG_SHELL) \
 	                  $(srctree)/scripts/setlocalversion $(srctree))
@@ -428,19 +428,19 @@ endif
 
 localver-full = $(localver)$(localver-auto)
 
-# Store (new) KERNELRELASE string in include/config/kernel.release
+# 在 include/config/kernel.release 中存储（新的）KERNELRELASE 字符串
 kernelrelease = $(KERNELVERSION)$(localver-full)
 include/config/kernel.release: include/config/auto.conf FORCE
 	$(Q)rm -f $@
 	$(Q)echo $(kernelrelease) > $@
 
-# Listed in dependency order
+# 按依赖顺序列出
 PHONY += prepare archprepare prepare0 prepare1 prepare2 prepare3
 
-# prepare3 is used to check if we are building in a separate output directory,
-# and if so do:
-# 1) Check that make has not been executed in the kernel src $(srctree)
-# 2) Create the include2 directory, used for the second asm symlink
+# prepare3 用于检查我们是否在单独的输出目录中构建，
+# 如果是这样的话：
+# 1) 检查内核src中是否没有执行make $(srctree)
+# 2) 创建 include2 目录，用于第二个 asm 符号链接
 prepare3: include/config/kernel.release
 ifneq ($(KBUILD_SRC),)
 	@echo '  Using $(srctree) as source for kernel'
@@ -453,7 +453,7 @@ ifneq ($(KBUILD_SRC),)
 	$(Q)ln -fsn $(srctree)/include/asm-$(ARCH) include2/asm
 endif
 
-# prepare2 creates a makefile if using a separate output directory
+# 如果使用单独的输出目录，prepare2 会创建一个 makefile
 prepare2: prepare3 outputmakefile
 
 prepare1: prepare2 include/target/version.h include/target/utsrelease.h \
@@ -464,29 +464,29 @@ archprepare: prepare1
 prepare0: archprepare FORCE
 	$(Q)$(MAKE) $(build)=.
 
-# All the preparing..
+# 所有的准备..
 prepare: prepare0
 
-# Leave this as default for preprocessing openos.lds.S, which is now
-# done in arch/$(ARCH)/kernel/Makefile
+# 将其保留为预处理 openos.lds.S 的默认值，现在
+# 在 arch/$(ARCH)/kernel/Makefile 中完成
 
 export CPPFLAGS_openos.lds += -P -C -U$(ARCH)
 
-# FIXME: The asm symlink changes when $(ARCH) changes. That's
-# hard to detect, but I suppose "make mrproper" is a good idea
-# before switching between archs anyway.
-# FIXME: SDCC can not recognize cygwin's symlink
+# FIXME: 当 $(ARCH) 改变时，asm 符号链接改变。那是
+# 很难检测到，但我想“make mrproper”是个好主意
+# 无论如何在拱门之间切换之前。
+# FIXME: SDCC 无法识别 cygwin 的符号链接
 
 include/asm:
 	@echo '  SYMLINK $@ -> arch/$(ARCH)/include/asm'
 	$(Q)if [ ! -d include ]; then mkdir -p include; fi;
 	@$(SYMLINK) $(TOPDIR)/arch/$(ARCH)/include/asm $@
 
-# Generate some files
+# 生成一些文件
 # ---------------------------------------------------------------------------
 
-# KERNELRELEASE can change from a few different places, meaning version.h
-# needs to be updated, so this check is forced on all builds
+# KERNELRELEASE 可以从几个不同的地方改变，意思是 version.h
+# 需要更新，因此对所有构建强制执行此检查
 
 uts_len := 64
 define filechk_utsrelease.h
@@ -510,23 +510,23 @@ include/target/utsrelease.h: include/config/kernel.release FORCE
 	$(call filechk,utsrelease.h)
 
 ###
-# Cleaning is done on three levels.
-# make clean     Delete most generated files
-# make distclean Remove editor backup files, patch leftover files and the like
+# 清洁分三层进行。
+# make clean 删除大部分生成的文件
+# make distclean 删除编辑器备份文件、补丁遗留文件等
 
-# Directories & files removed with 'make clean'
+# 使用“make clean”删除的目录和文件
 CLEAN_FILES +=	openos openos.strip openos.map \
                 .tmp_version .tmp_openos* .tmp_openos.map
 CLEAN_DIRS += include/asm
 
-# Directories & files removed with 'make mrproper'
+# 使用“make mrproper”删除的目录和文件
 MRPROPER_DIRS  += include/config include2 usr/include
 MRPROPER_FILES += .config .config.old .version .old_version \
                   include/target/autoconf.h include/target/version.h      \
                   include/target/utsrelease.h                            \
 		  Module.symvers tags TAGS cscope*
 
-# clean - Delete most, but leave enough to build external modules
+# clean -删除大部分，但留下足够的空间来构建外部模块
 #
 clean: rm-dirs  := $(CLEAN_DIRS)
 clean: rm-files := $(CLEAN_FILES)
@@ -548,7 +548,7 @@ clean: archclean $(clean-dirs)
 		-o -name '.*.d' -o -name '.*.tmp' -o -name '*.mod.c' \) \
 		-type f -print | xargs rm -f
 
-# mrproper - Delete all generated files, including .config
+# mrproper -删除所有生成的文件，包括.config
 #
 mrproper: rm-dirs  := $(wildcard $(MRPROPER_DIRS))
 mrproper: rm-files := $(wildcard $(MRPROPER_FILES))
@@ -598,7 +598,7 @@ kernelrelease:
 kernelversion:
 	@echo $(KERNELVERSION)
 
-# FIXME Should go into a make.lib or something
+# FIXME 应该进入 make.lib 或其他东西
 # ===========================================================================
 
 quiet_cmd_rmdirs = $(if $(wildcard $(rm-dirs)),CLEAN   $(wildcard $(rm-dirs)))
@@ -615,18 +615,18 @@ a_flags = -Wp,-MD,$(depfile) $(AFLAGS) $(AFLAGS_KERNEL) \
 quiet_cmd_as_o_S = AS      $@
 cmd_as_o_S       = $(CC) $(a_flags) -c -o $@ $<
 
-# read all saved command lines
+# 读取所有保存的命令行
 
 targets := $(wildcard $(sort $(targets)))
 cmd_files := $(wildcard .*.cmd $(foreach f,$(targets),$(dir $(f)).$(notdir $(f)).cmd))
 
 ifneq ($(cmd_files),)
-  $(cmd_files): ;	# Do not try to update included dependency files
+  $(cmd_files): ;	# 不要尝试更新包含的依赖文件
   include $(cmd_files)
 endif
 
-# Shorthand for $(Q)$(MAKE) -f scripts/Makefile.clean obj=dir
-# Usage:
+# $(Q)$(MAKE) -f scripts/Makefile.clean obj=dir 的简写
+# 用法：
 # $(Q)$(MAKE) $(clean)=dir
 clean := -f $(if $(KBUILD_SRC),$(srctree)/)scripts/Makefile.clean obj
 

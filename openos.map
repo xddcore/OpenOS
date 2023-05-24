@@ -29,41 +29,41 @@ Linker script and memory map
 .iplt           0x0000000000080358        0x0
  .iplt          0x0000000000080358        0x0 arch/arm64/kernel/head.o
 
-.rodata         0x0000000000080358       0x28
+.rodata         0x0000000000080358       0x47
  *(.rodata)
- .rodata        0x0000000000080358       0x28 init/built-in.lib
+ .rodata        0x0000000000080358       0x47 init/built-in.lib
 
-.eh_frame       0x0000000000080380       0xb0
- .eh_frame      0x0000000000080380       0x30 init/built-in.lib
+.eh_frame       0x00000000000803a0       0xb0
+ .eh_frame      0x00000000000803a0       0x30 init/built-in.lib
                                          0x2c (size before relaxing)
- *fill*         0x00000000000803b0        0x0 
- .eh_frame      0x00000000000803b0       0x80 arch/arm64/mach-rpi/built-in.lib
+ *fill*         0x00000000000803d0        0x0 
+ .eh_frame      0x00000000000803d0       0x80 arch/arm64/mach-rpi/built-in.lib
                                          0x94 (size before relaxing)
 
-.rela.dyn       0x0000000000080430        0x0
+.rela.dyn       0x0000000000080450        0x0
  .rela.text.boot
-                0x0000000000080430        0x0 arch/arm64/kernel/head.o
- .rela.iplt     0x0000000000080430        0x0 arch/arm64/kernel/head.o
+                0x0000000000080450        0x0 arch/arm64/kernel/head.o
+ .rela.iplt     0x0000000000080450        0x0 arch/arm64/kernel/head.o
 
-.data           0x0000000000080430        0x0
+.data           0x0000000000080450        0x0
  *(.data)
- .data          0x0000000000080430        0x0 arch/arm64/kernel/head.o
- .data          0x0000000000080430        0x0 init/built-in.lib
- .data          0x0000000000080430        0x0 arch/arm64/kernel/built-in.lib
- .data          0x0000000000080430        0x0 arch/arm64/mach-rpi/built-in.lib
+ .data          0x0000000000080450        0x0 arch/arm64/kernel/head.o
+ .data          0x0000000000080450        0x0 init/built-in.lib
+ .data          0x0000000000080450        0x0 arch/arm64/kernel/built-in.lib
+ .data          0x0000000000080450        0x0 arch/arm64/mach-rpi/built-in.lib
 
-.igot.plt       0x0000000000080430        0x0
- .igot.plt      0x0000000000080430        0x0 arch/arm64/kernel/head.o
-                0x0000000000080430                . = ALIGN (0x8)
-                0x0000000000080430                bss_begin = .
+.igot.plt       0x0000000000080450        0x0
+ .igot.plt      0x0000000000080450        0x0 arch/arm64/kernel/head.o
+                0x0000000000080450                . = ALIGN (0x8)
+                0x0000000000080450                bss_begin = .
 
-.bss            0x0000000000080430        0x0
+.bss            0x0000000000080450        0x0
  *(.bss*)
- .bss           0x0000000000080430        0x0 arch/arm64/kernel/head.o
- .bss           0x0000000000080430        0x0 init/built-in.lib
- .bss           0x0000000000080430        0x0 arch/arm64/kernel/built-in.lib
- .bss           0x0000000000080430        0x0 arch/arm64/mach-rpi/built-in.lib
-                0x0000000000080430                bss_end = .
+ .bss           0x0000000000080450        0x0 arch/arm64/kernel/head.o
+ .bss           0x0000000000080450        0x0 init/built-in.lib
+ .bss           0x0000000000080450        0x0 arch/arm64/kernel/built-in.lib
+ .bss           0x0000000000080450        0x0 arch/arm64/mach-rpi/built-in.lib
+                0x0000000000080450                bss_end = .
 LOAD arch/arm64/kernel/head.o
 LOAD init/built-in.lib
 START GROUP
