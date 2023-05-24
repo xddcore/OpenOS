@@ -1,4 +1,6 @@
 deps_config := \
+	lab/rlk/Kconfig \
+	lab/Kconfig \
 	init/Kconfig \
 	arch/arm64/Kconfig
 

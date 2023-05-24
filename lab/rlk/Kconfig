@@ -1,0 +1,66 @@
+#
+# For a description of the syntax of this configuration file,
+# see scripts/kbuild/config-language.txt.
+#
+
+choice
+	prompt "Lab rlk choice"
+	default LAB_NONE
+
+config LAB_NONE
+	bool "Lab_None"
+
+config LAB3_1
+	bool "Lab3_1"
+
+config LAB3_2
+	bool "Lab3_2"
+
+config LAB3_3
+	bool "Lab3_3"
+
+config LAB3_4
+	bool "Lab3_4"
+
+config LAB3_5
+	bool "Lab3_5"
+
+config LAB3_6
+	bool "Lab3_6"
+    
+config LAB4_1
+	bool "Lab4_1"
+
+config LAB4_2
+	bool "Lab4_2"
+
+config LAB4_3
+	bool "Lab4_3"
+
+config LAB4_4
+	bool "Lab4_4"
+
+config LAB4_5
+	bool "Lab4_5"
+
+config LAB5_1
+	bool "Lab5_1"
+    
+config LAB5_2
+	bool "Lab5_2"
+
+config LAB5_3
+	bool "Lab5_3"
+
+config LAB6_1
+	bool "Lab6_1"
+
+config LAB6_2
+	bool "Lab6_2"
+
+config LAB6_3
+	bool "Lab6_3"
+
+config LAB6_4
+	bool "Lab6_4"
+endchoice

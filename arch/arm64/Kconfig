@@ -18,12 +18,6 @@ config ARCH_BCM2835
 	This enables support for the Broadcom BCM2837 and BCM2711 SoC.
 	These SoCs are used in the Raspberry Pi 3 and 4 devices.
 
-config ARCH_VEXPRESS
-	bool "ARMv8 software model (Versatile Express)"
-	help
-	This enables support for the ARMv8 software model (Versatile
-	Express).
-
 config ARCH_QEMU_AARCH64
 	bool "QEMU_AARCH64"
 	help
@@ -32,7 +26,7 @@ endchoice
 
 choice
 	prompt "Board selection"
-	default BOARD_PI3B
+	default BOARD_PI4B
 
 config BOARD_PI3B
 	bool "Raspberry 3B"
@@ -51,27 +45,6 @@ config PI_MINI_UART
 
 config PI_PL_UART
 	bool "pl_uart"
-endchoice
-
-choice
-	prompt "ASM Lab Choice"
-	default LAB2_1
-
-config LAB2_1
-	bool "lab2_1"
-
-endchoice
-
-
-choice
-	prompt "OpenNNA"
-	default VERSION_2_0
-
-config VERSION_2_0
-	bool "version_2_0"
-
-config NONE
-	bool "none"
 endchoice
 
 
