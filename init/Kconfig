@@ -1,0 +1,17 @@
+#
+# For a description of the syntax of this configuration file,
+# see scripts/kbuild/config-language.txt.
+#
+
+choice
+	prompt "Init Config"
+	default aaaBOARD_PI3B
+
+config INIT_CONFIG
+	bool "Init Config"
+
+config NONE
+	bool "NONE"
+endchoice
+
+source "lab/Kconfig"

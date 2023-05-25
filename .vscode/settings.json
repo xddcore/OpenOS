@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/rlk/rlk/OpenOS",
+            "binaryPath": "/home/rlk/rlk/OpenOS/openos",
+            "binaryArgs": []
+        }
+    ]
+}
