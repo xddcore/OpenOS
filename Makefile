@@ -522,13 +522,13 @@ setenv:
 	sudo apt-get update
 	sudo apt-get install -y qemu-system-arm libncurses5-dev gcc-aarch64-linux-gnu build-essential git bison flex libssl-dev
 	sudo apt-get install -y ninja-build pkg-config libglib2.0-dev libmount-dev libpixman-1-dev
-	git clone https://github.com/0xMirasio/qemu-patch-raspberry4.git \
-	cd qemu-patch-raspberry4 \
-	mkdir build \
-	cd build \
-	../configure \
-	make \
-	make install \
+	git clone https://github.com/0xMirasio/qemu-patch-raspberry4.git; \
+	cd qemu-patch-raspberry4; \
+	mkdir build; \
+	cd build; \
+	../configure; \
+	make; \
+	make install; \
 
 
 ###
