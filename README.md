@@ -2,7 +2,7 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 12:23:07
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-25 15:43:43
+ * @LastEditTime: 2023-05-25 16:10:08
  * @FilePath: /xddcore/OpenOS/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
@@ -78,5 +78,7 @@ git clone https://github.com/xddcore/OpenOS.git
 ### 2.构建开发环境
 
 ```
+# 1.构建OpenOS编译环境
+# 2.利用树莓派4b patch重新编译安装qemu-system-aarch64,使qemu支持仿真树莓派4b
 make setenv
 ```
