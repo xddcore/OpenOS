@@ -2,7 +2,7 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 12:23:07
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-19 21:09:47
+ * @LastEditTime: 2023-05-25 15:43:43
  * @FilePath: /xddcore/OpenOS/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
@@ -65,3 +65,18 @@ BenOS: https://github.com/runninglinuxkernel/BenOS
 - [ ] 6. 实现execv系统调用
 - [ ] 7. 实现简单的shell界面
 - [ ] 8. 添加多核SMP的支持
+
+## 使用指南
+
+### 1.获取源码
+
+```
+git clone https://github.com/xddcore/OpenOS.git
+```
+
+
+### 2.构建开发环境
+
+```
+make setenv
+```
