@@ -86,11 +86,11 @@ define archhelp
 endef
 
 ifeq ($(CONFIG_BOARD_PI3B), y)
-QEMU_FLAGS  += -machine raspi3
+QEMU_FLAGS  += -machine raspi3b
 endif
 
 ifeq ($(CONFIG_BOARD_PI4B), y)
-QEMU_FLAGS  += -machine raspi4
+QEMU_FLAGS  += -machine raspi4b2g
 endif
 
 ifeq ($(CONFIG_PI_MINI_UART),y)

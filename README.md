@@ -2,7 +2,7 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 12:23:07
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-25 16:10:08
+ * @LastEditTime: 2023-05-25 17:14:12
  * @FilePath: /xddcore/OpenOS/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
@@ -28,7 +28,7 @@ BenOS: https://github.com/runninglinuxkernel/BenOS
 |  ----  | ----  |
 | 树莓派4B  | ✅ |
 | 树莓派3B  | ❌ |
-| QEMU-aarch64 | ✅ |
+| QEMU-aarch64(推荐) | ✅ |
 | -  | - |
 
 ## TODO List
@@ -75,10 +75,38 @@ git clone https://github.com/xddcore/OpenOS.git
 ```
 
 
-### 2.构建开发环境
+### 2.构建开发环境(QEMU)
+
+#### 2.1 构建OpenOS编译环境
+```
+cd OpenOS/
+make setenv
+```
+
+#### 2.2 手动安装QEMU
+>利用树莓派4b patch重新编译安装qemu-system-aarch64,使qemu支持仿真树莓派4b
 
 ```
-# 1.构建OpenOS编译环境
-# 2.利用树莓派4b patch重新编译安装qemu-system-aarch64,使qemu支持仿真树莓派4b
-make setenv
+cd ~
+git clone https://github.com/0xMirasio/qemu-patch-raspberry4.git
+cd qemu-patch-raspberry4
+mkdir build
+cd build
+../configure
+make -j8
+sudo make install
+```
+
+#### 2.3 测试QEMU
+```
+qemu-system-aarch64 -machine help
+#找一下raspi4b2g是否在支持列表中
+```
+
+#### 2.4 测试OpenOS
+```
+make clean
+make menuconfig
+make
+make run
 ```
