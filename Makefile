@@ -515,10 +515,10 @@ include/target/utsrelease.h: include/config/kernel.release FORCE
 # add by xddcore
 # test pss at ubuntu
 .PHONY:setenv
-
+#$(shell sudo apt-get update)
 setenv:
-	$(shell sudo apt-get update)
-	$(shell sudo apt-get install qemu-system-arm libncurses5-dev gcc-aarch64-linux-gnu build-essential git bison flex libssl-dev)
+	sudo apt-get update
+	sudo apt-get install -y qemu-system-arm libncurses5-dev gcc-aarch64-linux-gnu build-essential git bison flex libssl-dev
 
 
 ###
