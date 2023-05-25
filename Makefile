@@ -249,6 +249,7 @@ scripts: scripts_basic include/config/auto.conf
 
 # 我们将链接到我们需要访问的内核/子目录的对象
 init-y		:= init/
+lab-y 		:= lab/
 #libs-y		:= lib/
 #drivers-y	:= drivers/
 core-y		:=
@@ -508,6 +509,17 @@ include/target/version.h: $(srctree)/Makefile FORCE
 
 include/target/utsrelease.h: include/config/kernel.release FORCE
 	$(call filechk,utsrelease.h)
+
+###
+# set up env for OpenOS。
+# add by xddcore
+# test pss at ubuntu
+.PHONY:setenv
+
+setenv:
+	$(shell sudo apt-get update)
+	$(shell sudo apt-get install qemu-system-arm libncurses5-dev gcc-aarch64-linux-gnu build-essential git bison flex libssl-dev)
+
 
 ###
 # 清洁分三层进行。
