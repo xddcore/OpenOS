@@ -2,7 +2,7 @@
  * @Author: Chengsen Dong 1034029664@qq.com
  * @Date: 2023-05-18 12:23:07
  * @LastEditors: Chengsen Dong 1034029664@qq.com
- * @LastEditTime: 2023-05-25 17:31:54
+ * @LastEditTime: 2023-05-26 21:58:01
  * @FilePath: /xddcore/OpenOS/README.md
  * @Description: 
  * Copyright (c) 2023 by ${git_name_email}(www.github.com/xddcore), All Rights Reserved. 
@@ -76,11 +76,30 @@ make
 make run
 ```
 
+#### 2.5 QEMU+GDB联合调试
+**1号终端**
+```
+cd OpenOS/
+make debug
+```
+**2号终端(再新开一个cmd)**
+```
+cd OpenOS/
+gdb ./openos -tui
+
+#连接QEMU
+target remote localhost:1234
+layout regs
+#把断点打到起始head.S
+b _start
+c
+```
+
 ## TODO List
 
 ### Part1
 
-- [ ] 1. 打印"Hello, World!" 
+- [x] 1. 打印"Hello, World!" 
 - [ ] 2. 切换异常等级
 - [ ] 3. 实现简易的printk打印函数
 - [ ] 4. 中断实验 
